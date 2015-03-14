@@ -199,6 +199,35 @@ public final class JExpr
     return new JInvocation (lhs, method);
   }
 
+  /**
+   * Creates a lambda expression with informal parameters and an empty block
+   */
+  @Nonnull
+  public static JLambda lambda(){
+    return lambda(null);
+  }
+
+  /**
+   * Creates a lambda expression with informal parameters and an body of {@code generable}
+   */
+  @Nonnull
+  public static JLambda lambda(@Nullable final IJGenerable generable){
+    return lambda(generable, false);
+  }
+
+  /**
+   * Creates a lambda expression
+   * @param generable
+   *        Lambda body
+   * @param formal
+   *        Whether the lambda parameters are formal or informal parameters
+   * @return lambda expression
+   */
+  @Nonnull
+  public static JLambda lambda(@Nullable final IJGenerable generable, final boolean formal){
+    return new JLambda(generable, formal);
+  }
+
   @Nonnull
   public static JFieldRef ref (@Nonnull final JVar field)
   {
