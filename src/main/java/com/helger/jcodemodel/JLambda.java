@@ -182,6 +182,23 @@ public final class JLambda extends AbstractJExpressionImpl{
   }
 
   /**
+   * Returns the body as a JBlock.
+   *
+   * @return A JBlock
+   * @throws IllegalStateException
+   *         If the lambdas body is an expression and not a JBlock
+   */
+  @Nonnull
+  public JBlock block(){
+    if(statement == null)
+      body (new JBlock ());
+    if(statement instanceof JBlock)
+      return (JBlock)statement;
+    else
+      throw new IllegalStateException ("Body is not a JBlock");
+  }
+
+  /**
    * Returns the body of the lambda expression. This can either be a JBlock or any expression.
    * If no body has not yet been set then an empty JBlock is returned.
    */
@@ -233,7 +250,11 @@ public final class JLambda extends AbstractJExpressionImpl{
     }
     if(formal || argLen != 1)
       f.print (')');
-    f.print ("->");
-    f.generable (body());
+    f.print(" -> ");
+    if(statement instanceof JBlock && block().isEmpty()){
+      f.print("{}");
+    }else{
+      f.indent ().generable (body()).outdent ();
+    }
   }
 }

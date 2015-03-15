@@ -201,6 +201,8 @@ public final class JExpr
 
   /**
    * Creates a lambda expression with informal parameters and an empty block
+   *
+   * This will generate code will require a java 8 compiler.
    */
   @Nonnull
   public static JLambda lambda(){
@@ -208,7 +210,19 @@ public final class JExpr
   }
 
   /**
+   * Creates a lambda expression with formal or informal parameters and an empty block
+   *
+   * This will generate code will require a java 8 compiler.
+   */
+  @Nonnull
+  public static JLambda lambda(boolean formal){
+    return lambda(null, formal);
+  }
+
+  /**
    * Creates a lambda expression with informal parameters and an body of {@code generable}
+   *
+   * This will generate code will require a java 8 compiler.
    */
   @Nonnull
   public static JLambda lambda(@Nullable final IJGenerable generable){
@@ -217,6 +231,9 @@ public final class JExpr
 
   /**
    * Creates a lambda expression
+   *
+   * This will generate code will require a java 8 compiler.
+   *
    * @param generable
    *        Lambda body
    * @param formal
